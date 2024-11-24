@@ -31,7 +31,7 @@
                     <a href="" class="hover:text-gray-300">Actors</a>
                 </li>
             </ul>
-            <div class="flex items-center">
+            <div class="flex flex-col md:flex-row items-center">
                 <div class="relative">
                     <input type="text" name="" id="" class="bg-gray-800 rounded-full w-64 px-4 pl-8 py-1 focus:ouline-none focus:shadow-outline" placeholder="Search">
                     <div class="absolute top-0">
@@ -39,6 +39,11 @@
                             <path d="M20.207 18.793L16.6 15.184a7.027 7.027 0 1 0-1.416 1.416l3.609 3.609a1 1 0 0 0 1.414-1.416zM6 11a5 5 0 1 1 5 5 5.006 5.006 0 0 1-5-5z" fill="#fff" style=""></path>
                         </svg>
                     </div>
+                </div>
+                <div class="md:ml-4 mt-3 md:mt-0">
+                    <a href="">
+                        <img src="img/avatar.jpg" alt="avtar" class="rounded-full w-8 h-8">
+                    </a>
                 </div>
             </div>
         </div>
