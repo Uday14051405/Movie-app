@@ -7,6 +7,7 @@
     <title>Movie App</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 
 <body class="font-sans bg-gray-900 text-white">
@@ -49,6 +50,7 @@
         </div>
     </nav>
     @yield('content')
+    @livewireScripts
 </body>
 
 </html>
