@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use Illuminate\Support\Facades\Http;
+use Livewire\Livewire;
+use Tests\TestCase;
 
 class ViewMoviesTest extends TestCase
 {
@@ -15,7 +15,7 @@ class ViewMoviesTest extends TestCase
             'https://api.themoviedb.org/3/movie/popular' => $this->fakePopularMovies(),
 
             'https://api.themoviedb.org/3/movie/now_playing' => Http::response([
-                'results' => []
+                'results' => [],
             ], 200)
         ]);
 
@@ -25,6 +25,17 @@ class ViewMoviesTest extends TestCase
         $response->assertSee('Popular Movies');
     }
 
+    public function the_search_dropdown_works_correctly()
+    {
+        Http::fake([
+            'https://api.themoviedb.org/3/search/movie?query=Moana 2' => $this->fakePopularMovies(),
+        ]);
+
+        Livewire::test('seach-dropdown')
+            ->assertDonSee('Moana 2')
+            ->set('search', 'Moana 2')
+            ->assertSee('Moana 2');
+    }
 
     public function fakePopularMovies()
     {
@@ -50,8 +61,8 @@ class ViewMoviesTest extends TestCase
                     "video" => false,
                     "vote_average" => 7.268,
                     "vote_count" => 95,
-                ]
-            ]
+                ],
+            ],
 
         ], 200);
     }
