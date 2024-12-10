@@ -35,12 +35,12 @@
                 <h4 class="text-white font-semibold">Featured Crew</h4>
                 <div class="flex mt-4">
                     @foreach ($movie['crew'] as $crew)
-                        
+
                             <div class="mr-8">
                                 <div>{{$crew['name']}}</div>
                                 <div class="text-sm text-gray-400">{{$crew['job']}}</div>
                             </div>
-                       
+
                     @endforeach
                 </div>
             </div>
