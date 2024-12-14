@@ -14,7 +14,8 @@ class MovieViewModel extends ViewModel
         $this->movie = $movie;
     }
 
-    public function movie(){
+    public function movie()
+    {
         return collect($this->movie)->merge([
             'poster_path' => 'https://image.tmdb.org/t/p/w500/' . $this->movie['poster_path'],
             'vote_average' => $this->movie['vote_average'] * 10 . '%',

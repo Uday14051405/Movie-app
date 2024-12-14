@@ -9,6 +9,3 @@ Route::get('/movies/{movie}', [MoviesController::class, 'show'])->name('movies.s
 
 Route::get('/actors', [ActorsController::class, 'index'])->name('actors.index');
 Route::get('/actors/{actor}', [ActorsController::class, 'show'])->name('actors.show');
-
-// Route::view("/", "index");
-// Route::view("/show", "show");
