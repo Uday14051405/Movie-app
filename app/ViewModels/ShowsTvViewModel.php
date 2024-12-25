@@ -24,6 +24,7 @@ class ShowsTvViewModel extends ViewModel
             'vote_average' => $this->tvShow['vote_average'] * 10 . '%',
             'first_air_date' => Carbon::parse($this->tvShow['first_air_date'])->format('M d, Y'),
             'genres' => collect($this->tvShow['genres'])->pluck('name')->flatten()->implode(', '),
+            'crew' => collect($this->tvShow['credits']['crew'])->take(2),
             'cast' => collect($this->tvShow['credits']['cast'])->take(5)->map(function ($cast) {
                 return collect($cast)->merge([
                     'profile_path' => $cast['profile_path']

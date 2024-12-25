@@ -5,7 +5,7 @@
 <div class="tv-info border-b border-gray-800">
     <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row">
         <div class="flex-none">
-            <img src="{{ $tvShow['poster_path'] }}" alt="" class="w-64 lg:w-96">
+            <img src="{{ $tvShow['poster_path'] }}" class="w-64 lg:w-96">
         </div>
         <div class="md:ml-24">
             <h2 class="text-4xl font-semibold">{{$tvShow['name']}}</h2>
@@ -34,14 +34,18 @@
             <div class="mt-12">
                 <h4 class="text-white font-semibold">Featured Crew</h4>
                 <div class="flex mt-4">
-                    @foreach ($tvShow['crew'] as $crew)
+                    @if(isset($tvShow['crew']))
+                        @foreach ($tvShow['crew'] as $crew)
 
-                            <div class="mr-8">
-                                <div>{{$crew['name']}}</div>
-                                <div class="text-sm text-gray-400">{{$crew['job']}}</div>
-                            </div>
+                                <div class="mr-8">
+                                    <div>{{$crew['name']}}</div>
+                                    <div class="text-sm text-gray-400">{{$crew['job']}}</div>
+                                </div>
 
-                    @endforeach
+                        @endforeach
+                    @else
+                        <p>Not available</p>
+                    @endif
                 </div>
             </div>
 
