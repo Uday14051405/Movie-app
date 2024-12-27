@@ -18,9 +18,7 @@ class ShowsTvViewModel extends ViewModel
     {
         // return collect($this->tvShow)->dump();
         return collect($this->tvShow)->merge([
-            'poster_path' => $this->tvShow['poster_path']
-                ? 'https://image.tmdb.org/t/p/w500/' . $this->tvShow['poster_path']
-                : 'https://via.placeholder.com/500x750',
+            'poster_path' => $this->tvShow['poster_path'],
             'vote_average' => $this->tvShow['vote_average'] * 10 . '%',
             'first_air_date' => Carbon::parse($this->tvShow['first_air_date'])->format('M d, Y'),
             'genres' => collect($this->tvShow['genres'])->pluck('name')->flatten()->implode(', '),
@@ -48,6 +46,6 @@ class ShowsTvViewModel extends ViewModel
             'cast',
             'images',
             'created_by'
-        ])->dump();
+        ]);
     }
 }

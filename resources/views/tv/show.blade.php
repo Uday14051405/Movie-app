@@ -5,7 +5,7 @@
 <div class="tv-info border-b border-gray-800">
     <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row">
         <div class="flex-none">
-            <img src="{{ $tvShow['poster_path'] }}" class="w-64 lg:w-96">
+            <img src="https://image.tmdb.org/t/p/w500{{ $tvShow['poster_path'] }}" class="w-64 lg:w-96">
         </div>
         <div class="md:ml-24">
             <h2 class="text-4xl font-semibold">{{$tvShow['name']}}</h2>
@@ -32,20 +32,15 @@
             </p>
 
             <div class="mt-12">
-                <h4 class="text-white font-semibold">Featured Crew</h4>
                 <div class="flex mt-4">
-                    @if(isset($tvShow['crew']))
-                        @foreach ($tvShow['crew'] as $crew)
+                        @foreach ($tvShow['created_by'] as $crew)
 
                                 <div class="mr-8">
                                     <div>{{$crew['name']}}</div>
-                                    <div class="text-sm text-gray-400">{{$crew['job']}}</div>
+                                    <div class="text-sm text-gray-400">Creator</div>
                                 </div>
 
                         @endforeach
-                    @else
-                        <p>Not available</p>
-                    @endif
                 </div>
             </div>
 
@@ -89,11 +84,11 @@
     </div>
 </div>
 
-{{-- <div class="movie-cast border-b border-gray-800">
+<div class="movie-cast border-b border-gray-800">
     <div class="container mx-auto px-4 py-16">
         <h2 class="text-4xl font-semibold">Cast</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            @foreach ($tvShow['cast'] as $cast)
+            @foreach ($tvShow['credits']['cast'] as $cast)
                     <div class="mt-8">
                         <a href="{{ route('actors.show', $cast['id']) }}">
                             <img src="{{'https://image.tmdb.org/t/p/w200/' . $cast['profile_path']}}" alt="parasite" class="w-64 lg:w-96">
@@ -110,23 +105,28 @@
     </div>
 </div>
 
-<div class="movie-images" x-data="{ isOpen: false, image: ''}">
+<div class="tv-images" x-data="{ isOpen: false, image: ''}">
     <div class="container mx-auto px-4 py-16">
         <h2 class="text-4xl font-semibold">Images</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            @foreach ($movie['images'] as $image)
-                    <div class="mt-8">
-                        <a
-                        @click.prevent="
-                            isOpen = true
-                                image='{{ 'https://image.tmdb.org/t/p/original/'.$image['file_path'] }}'
-                            "
-                            href="#"
-                        >
-                            <img src="{{ 'https://image.tmdb.org/t/p/w500/'.$image['file_path'] }}" alt="image1" class="hover:opacity-75 transition ease-in-out duration-150">
-                        </a>
-                    </div>
-            @endforeach
+            @if(isset($tvShow['images']['file_path']))
+                @foreach ($tvShow['images'] as $image)
+                        <div class="mt-8">
+                            <a
+                            @click.prevent="
+                                isOpen = true
+                                    image='{{ 'https://image.tmdb.org/t/p/original/'.$image['file_path'] }}'
+                                "
+                                href="#"
+                            >
+                                <img src="{{ 'https://image.tmdb.org/t/p/w500/'.$image['file_path'] }}" alt="image1" class="hover:opacity-75 transition ease-in-out duration-150">
+                            </a>
+                        </div>
+                @endforeach
+
+            @else
+                <br><p>Not Available</p>
+            @endif
         </div>
         <div style="background-color: rgba(0, 0, 0, .5);" class="fixed top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto" x-show="isOpen">
             <div class="container mx-auto lg:px-32 rounded-lg overflow-y-auto">
@@ -145,5 +145,5 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 @endsection
